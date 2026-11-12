@@ -42,34 +42,25 @@ function gallery() {
   const tok = Object.entries(LX.D.meta.tokens || {}).map(([k, v]) => `${k}:${v}`).join(';');
   const frame = (s, i) => `<button class="frame s-${s}" style="${esc(tok)}" data-s="${s}" data-i="${i}" aria-label="${esc(LX.STY[s].cn)} ${i + 1}">${sl[s][i]}</button>`;
   ui.innerHTML = `<div class="g-wrap"><h1>${esc(LX.D.meta.short || 'Lectern')}</h1>
-<p class="g-intro">每次展示一种风格的全部 ${n} 页。点页面开始放映，逐步呈现内容。按左右方向键切换风格；放映时按 G 返回这里。</p>
-<nav class="g-nav" aria-label="切换风格"><button type="button" class="g-prev" aria-label="上一种风格">← 上一种</button><label class="g-select-label" for="g-style">风格 <select id="g-style">${ORDER.map(s => `<option value="${s}">${esc(LX.STY[s].cn)}</option>`).join('')}</select></label><span class="g-count" aria-live="polite"></span><button type="button" class="g-next" aria-label="下一种风格">下一种 →</button><button type="button" class="g-edit">编辑这份幻灯片</button></nav>
-<p class="g-lede"></p><div class="g-sheet"></div></div>` +
+<p class="g-intro">同一份内容，${ORDER.length} 种风格。点任意一页开始放映：点击或按右方向键逐步呈现，D 显示本页每个数字的来历，S 换风格，N 显示讲稿，E 进入编辑，G 回到这里。</p>
+<nav class="g-nav"><a href="#" data-v="compare">同页对比</a>${ORDER.map(s => `<a href="#" data-v="${s}">${esc(LX.STY[s].cn)}</a>`).join('')}<a href="#" data-v="edit" class="g-edit">编辑这份幻灯片</a></nav>
+<div class="g-pick">${LX.D.slides.map((x, i) => `<button data-p="${i}">${i + 1} · ${esc(name(i))}</button>`).join('')}</div><p class="g-lede"></p><div class="g-sheet"></div></div>` +
     ORDER.map(s => `<div class="s-${s}">${patternSheet(s)}</div>`).join('');
-  let index = Math.max(0, ORDER.indexOf(ST.style));
+  let view = ST.gview || 'compare', page = ST.gpage ?? Math.min(2, n - 1);
   const fit = f => f.style.setProperty('--s', f.clientWidth / 1920), ro = new ResizeObserver(es => es.forEach(e => fit(e.target)));
-  function draw() {
-    const view = ORDER[index]; ST.style = view; ro.disconnect();
-    $('#g-style').value = view; $('.g-count').textContent = `${index + 1} / ${ORDER.length}`;
-    $('.g-lede').innerHTML = `<b>${esc(LX.STY[view].cn)} · ${esc(LX.STY[view].en)}</b>　${esc(LX.STY[view].line)}`;
-    $('.g-sheet').innerHTML = LX.D.slides.map((_, i) => `<figure>${frame(view, i)}<figcaption>${i + 1} / ${n} · ${esc(name(i))}</figcaption></figure>`).join('');
-    $$('.g-sheet .frame').forEach(f => { applyStep($('.slide', f), 99); ro.observe(f); fit(f); f.onclick = e => { e.stopPropagation(); ST.from = 'gallery'; present(+f.dataset.i, 0); }; });
-  }
-  function shift(d) { index = (index + d + ORDER.length) % ORDER.length; draw(); }
-  $('.g-prev').onclick = () => shift(-1);
-  $('.g-next').onclick = () => shift(1);
-  $('#g-style').onchange = e => { index = ORDER.indexOf(e.target.value); draw(); };
-  $('.g-edit').onclick = () => { ST.from = 'gallery'; edit(); };
-  ST.galleryShift = shift;
+  function draw() { ST.gview = view; ST.gpage = page;
+    $$('.g-nav a').forEach(a => a.classList.toggle('on', a.dataset.v === view)); $('.g-pick').style.display = view === 'compare' ? '' : 'none';
+    $$('.g-pick button').forEach(b => b.classList.toggle('on', +b.dataset.p === page));
+    $('.g-lede').innerHTML = view === 'compare' ? '' : `<b>${esc(LX.STY[view].cn)} · ${esc(LX.STY[view].en)}</b>　${esc(LX.STY[view].line)}`;
+    $('.g-sheet').innerHTML = view === 'compare' ? ORDER.map(s => `<figure>${frame(s, page)}<figcaption>${esc(LX.STY[s].cn)}</figcaption></figure>`).join('') : LX.D.slides.map((_, i) => `<figure>${frame(view, i)}</figure>`).join('');
+    $$('.g-sheet .frame').forEach(f => { applyStep($('.slide', f), 99); ro.observe(f); fit(f); f.onclick = e => { e.stopPropagation(); ST.style = f.dataset.s; ST.from = 'gallery'; present(+f.dataset.i, 0); }; }); }
+  $$('.g-nav a').forEach(a => a.onclick = e => { e.preventDefault(); if (a.dataset.v === 'edit') { ST.from = 'gallery'; return edit(); } view = a.dataset.v; draw(); });
+  $$('.g-pick button').forEach(b => b.onclick = () => { page = +b.dataset.p; draw(); });
   draw();
 }
 addEventListener('resize', () => { if (ST.mode === 'present') showSlide(); });
 addEventListener('click', e => { if (ST.mode === 'present' && !e.target.closest('#ui')) next(); });
 addEventListener('keydown', e => {
-  if (ST.mode === 'gallery' && !e.metaKey && !e.ctrlKey && !e.altKey && !e.target.closest('input, select, textarea, [contenteditable]')) {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); ST.galleryShift(e.key === 'ArrowRight' ? 1 : -1); }
-    return;
-  }
   if (ST.mode !== 'present' || e.metaKey || e.ctrlKey) return;
   if (['ArrowRight', ' ', 'PageDown', 'Enter'].includes(e.key)) { e.preventDefault(); next(); }
   else if (['ArrowLeft', 'PageUp', 'Backspace'].includes(e.key)) prev();

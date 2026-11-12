@@ -4,7 +4,7 @@
 
 Lectern 把一篇论文变成一场没有“AI 味”的学术报告。它是给编程 agent（Claude Code、Codex 等）用的 skill，背后带一个引擎：agent 只写一份语义源文件，引擎把它渲染成 17 种风格，并按固定规则逐页检查。成品是一个 HTML 文件，能放映、能自己编辑，也能导出 PDF 和 PowerPoint。
 
-![同一页在 17 种风格下的样子](docs/styles.jpg)
+[查看全部 17 种风格 ↓](#17-种风格)
 
 ## AI 做的幻灯片为什么一股 AI 味，这里怎么解决
 
@@ -21,7 +21,7 @@ Lectern 把一篇论文变成一场没有“AI 味”的学术报告。它是给
 - **17 种风格，分四组。** 材质：期刊图版、瑞士网格、双色孔版、中古拱形、宣纸朱印、线路图、荧光笔、黑板。结构：侧栏纲要、章节色、侧题特稿。传播：署名卡、单色墨、无障碍大字。场地与身份：夜场、数据指纹、牛皮纸。什么场合用哪种，见 [`styles/README.md`](styles/README.md)。
 - **逐步呈现。** 柱、线、表格行、段落和原图放大，都可以指定在第几次点击出现；元素出现时版面不跳动。PDF 每次点击一页，相当于 Beamer 的 overlay。
 
-  ![同一页的三次点击](docs/steps.jpg)
+  ![同一页的三次点击](docs/reveal.gif)
 - **论文原图。** `engine/extract.py` 按页码和位置从 PDF 取图（300 dpi），同时记下出处。上了幻灯片可以裁切、遮掉不讲的格子，点击后放大到某一格。
 - **logo、讲者和邮箱。** logo 放在扉页和页脚；每一页内容页的页脚有短标题、讲者、邮箱、章节和页码。
 - **像 Google Slides 一样的内置编辑器。** 点任何文字、标签、logo、图片或图表，旁边就弹出它自己的工具条。
@@ -70,7 +70,7 @@ python3 engine/build.py examples/resume --open gallery   # → examples/resume/o
 python3 engine/lint.py  examples/resume                  # 每种风格都应显示 PASS
 ```
 
-用浏览器打开 `examples/resume/out/deck.html`。画廊每次显示一种风格的全部页面。按左右方向键、点按钮或用菜单切换风格。点页面后开始逐步放映。
+用浏览器打开 `examples/resume/out/deck.html`，先看到所有风格的画廊，点任意一页开始放映。
 
 ## agent 拿到论文后做什么
 
@@ -104,7 +104,7 @@ my-talk/
 | D | 显示本页每个数字是怎么算出来的 |
 | S | 换风格 |
 | E | 编辑 |
-| G | 返回画廊（每次显示一种完整风格） |
+| G | 所有风格的画廊 |
 
 ## 交付后怎么改
 
@@ -169,6 +169,146 @@ docs/             README 用的图片
 ## 加一种新风格
 
 复制 `styles/_template/`。先写 `STYLE.md`，共九节：这是什么媒介、纸与墨、颜色逻辑、字体、形状文法、图表笔触、原生手法、媒介陷阱、可变空间。再写 CSS，字体文件放进 `fonts/`。验收标准：缩略图尺寸下能一眼认出来，`lint.py` 全部通过，且没有改动 `engine/base.css` 和图表代码。
+
+## 17 种风格
+
+每种 GIF 循环展示全部 7 页。点击「查看全部 7 页」打开静态总览。
+
+### 1. 期刊图版
+
+象牙纸上的学术专著：衬线、发丝线、图版与边注。
+
+![期刊图版 — 7 slides](docs/styles/plate.gif)
+
+[查看全部 7 页](docs/styles/plate-all.jpg) · [STYLE.md](styles/plate/STYLE.md)
+
+### 2. 瑞士网格
+
+白底、黑与一只红：粗体左对齐，一切挂在同一条横线上。
+
+![瑞士网格 — 7 slides](docs/styles/grid.gif)
+
+[查看全部 7 页](docs/styles/grid-all.jpg) · [STYLE.md](styles/grid/STYLE.md)
+
+### 3. 双色孔版
+
+米色纸上只印两只墨：蓝与橙，叠印处出现第三色。
+
+![双色孔版 — 7 slides](docs/styles/riso.gif)
+
+[查看全部 7 页](docs/styles/riso-all.jpg) · [STYLE.md](styles/riso/STYLE.md)
+
+### 4. 中古拱形
+
+奶油底上三只颜色和一个拱形，重复到底。
+
+![中古拱形 — 7 slides](docs/styles/arch.gif)
+
+[查看全部 7 页](docs/styles/arch-all.jpg) · [STYLE.md](styles/arch/STYLE.md)
+
+### 5. 宣纸朱印
+
+宣纸、墨色和一方朱砂印：页码盖在印里。
+
+![宣纸朱印 — 7 slides](docs/styles/seal.gif)
+
+[查看全部 7 页](docs/styles/seal-all.jpg) · [STYLE.md](styles/seal/STYLE.md)
+
+### 6. 线路图
+
+白底上的两条线路：步骤是站点，进度是线路图。
+
+![线路图 — 7 slides](docs/styles/transit.gif)
+
+[查看全部 7 页](docs/styles/transit-all.jpg) · [STYLE.md](styles/transit/STYLE.md)
+
+### 7. 荧光笔
+
+白纸黑字，只有一支黄色荧光笔负责强调。
+
+![荧光笔 — 7 slides](docs/styles/marker.gif)
+
+[查看全部 7 页](docs/styles/marker-all.jpg) · [STYLE.md](styles/marker/STYLE.md)
+
+### 8. 黑板
+
+深绿黑板上的白粉笔和一支黄粉笔，唯一的深色风格。
+
+![黑板 — 7 slides](docs/styles/chalk.gif)
+
+[查看全部 7 页](docs/styles/chalk-all.jpg) · [STYLE.md](styles/chalk/STYLE.md)
+
+### 9. 侧栏纲要
+
+左侧一条色栏写着全部章节，讲到哪一章哪一章就亮。Beamer 的侧栏导航，重做一遍。
+
+![侧栏纲要 — 7 slides](docs/styles/rail.gif)
+
+[查看全部 7 页](docs/styles/rail-all.jpg) · [STYLE.md](styles/rail/STYLE.md)
+
+### 10. 章节色
+
+每一章一种底色，翻页时底色一变，听众就知道进入了下一章。
+
+![章节色 — 7 slides](docs/styles/chapter.gif)
+
+[查看全部 7 页](docs/styles/chapter-all.jpg) · [STYLE.md](styles/chapter/STYLE.md)
+
+### 11. 侧题特稿
+
+标题在左栏从上往下排，右边整块留给图。适合宽屏，也适合会后当文章读。
+
+![侧题特稿 — 7 slides](docs/styles/feature.gif)
+
+[查看全部 7 页](docs/styles/feature-all.jpg) · [STYLE.md](styles/feature/STYLE.md)
+
+### 12. 署名卡
+
+每一页都带完整出处，四周留足安全边。被截图、被转发之后仍然知道出自哪篇论文。
+
+![署名卡 — 7 slides](docs/styles/cite.gif)
+
+[查看全部 7 页](docs/styles/cite-all.jpg) · [STYLE.md](styles/cite/STYLE.md)
+
+### 13. 单色墨
+
+只有一种墨。两组数据靠实心与斜线、实线与虚线区分，黑白打印、复印、电子墨水屏都不丢信息。
+
+![单色墨 — 7 slides](docs/styles/mono.gif)
+
+[查看全部 7 页](docs/styles/mono-all.jpg) · [STYLE.md](styles/mono/STYLE.md)
+
+### 14. 无障碍大字
+
+最小字号和图内文字上调一档，颜色用色盲友好的蓝与橙，再叠一层图案，后排和色觉障碍的听众都读得出。
+
+![无障碍大字 — 7 slides](docs/styles/access.gif)
+
+[查看全部 7 页](docs/styles/access-all.jpg) · [STYLE.md](styles/access/STYLE.md)
+
+### 15. 夜场
+
+深蓝黑的大厅用色：暖白文字，一只琥珀色只给焦点。
+
+![夜场 — 7 slides](docs/styles/night.gif)
+
+[查看全部 7 页](docs/styles/night-all.jpg) · [STYLE.md](styles/night/STYLE.md)
+
+### 16. 数据指纹
+
+页面底部的条纹由这篇论文自己的数字算出来，换一篇论文就换一副条纹；它同时是进度条。
+
+![数据指纹 — 7 slides](docs/styles/fingerprint.gif)
+
+[查看全部 7 页](docs/styles/fingerprint-all.jpg) · [STYLE.md](styles/fingerprint/STYLE.md)
+
+### 17. 牛皮纸
+
+牛皮纸上的黑墨和白墨。焦点系列用白墨，关键词贴白色标签。
+
+![牛皮纸 — 7 slides](docs/styles/kraft.gif)
+
+[查看全部 7 页](docs/styles/kraft-all.jpg) · [STYLE.md](styles/kraft/STYLE.md)
 
 ## 致谢
 

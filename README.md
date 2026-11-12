@@ -4,7 +4,7 @@
 
 Lectern turns a research paper into a talk that does not look AI-made. It is a skill for coding agents (Claude Code, Codex and others) with an engine behind it. The agent writes one semantic source file. The engine renders it in 17 styles and checks the result against fixed rules. You get a single HTML file that presents, edits itself and exports to PDF and PowerPoint.
 
-![The same slide in all 17 styles](docs/styles.jpg)
+[Browse all 17 styles ↓](#17-styles)
 
 ## Why AI slides look like AI slides, and what this does instead
 
@@ -21,7 +21,7 @@ Lectern turns a research paper into a talk that does not look AI-made. It is a s
 - **17 styles in four groups.** *Material*: plate, grid, riso, arch, seal, transit, marker, chalk. *Structure*: rail, chapter, feature. *Circulation*: cite, mono, access. *Venue and identity*: night, fingerprint, kraft. See [`styles/README.md`](styles/README.md) for which to use when.
 - **Step-by-step reveals.** Bars, lines, table rows, paragraphs and figure zooms appear on the click you choose. Nothing moves when something appears. The PDF has one page per click, like Beamer overlays.
 
-  ![Three clicks of one slide](docs/steps.jpg)
+  ![Three clicks of one slide](docs/reveal.gif)
 - **Figures from the paper.** `engine/extract.py` takes a figure out of the PDF at 300 dpi and records the page and position. On the slide you can crop it, hide panels you do not discuss, and zoom into one panel on a click.
 - **Logos, speaker and email.** Logos appear on the title slide and in the footer. Every content slide's footer carries the short title, speaker, email, section and page number.
 - **A built-in editor that works like Google Slides.** Click any text, label, logo, image or chart and a toolbar appears next to it.
@@ -70,7 +70,7 @@ python3 engine/build.py examples/resume --open gallery   # → examples/resume/o
 python3 engine/lint.py  examples/resume                  # every style must print PASS
 ```
 
-Open `examples/resume/out/deck.html` in a browser. The gallery shows every slide in one style. Use the left and right arrow keys, buttons, or style menu to change styles. Click a slide to present it with step-by-step reveals.
+Open `examples/resume/out/deck.html` in a browser. It opens as a gallery of all styles. Click a slide to present it.
 
 ## What the agent does with your paper
 
@@ -104,7 +104,7 @@ Open `out/deck.html`. Everything is in this one file, and it works offline.
 | D | show where every number on this slide comes from |
 | S | switch style |
 | E | edit |
-| G | gallery (one complete style at a time) |
+| G | gallery of all styles |
 
 ## Editing after delivery
 
@@ -169,6 +169,112 @@ docs/             images for this README
 ## Add a style
 
 Copy `styles/_template/`. Write its `STYLE.md` first (nine sections: what the medium is, paper and ink, colour logic, type, shape grammar, chart strokes, native moves, pitfalls, what may change). Then write the CSS and put the font files in `fonts/`. A style is accepted when its contact sheet is recognisable at thumbnail size, `lint.py` passes, and neither `engine/base.css` nor the chart code was changed.
+
+## 17 styles
+
+Each GIF cycles through all 7 slides. Open the full deck overview to see all slides at once.
+
+### 1. Journal Plate
+
+![Journal Plate — 7 slides](docs/styles/plate.gif)
+
+[View all 7 slides](docs/styles/plate-all.jpg) · [STYLE.md](styles/plate/STYLE.md)
+
+### 2. Swiss Grid
+
+![Swiss Grid — 7 slides](docs/styles/grid.gif)
+
+[View all 7 slides](docs/styles/grid-all.jpg) · [STYLE.md](styles/grid/STYLE.md)
+
+### 3. Two-ink Riso
+
+![Two-ink Riso — 7 slides](docs/styles/riso.gif)
+
+[View all 7 slides](docs/styles/riso-all.jpg) · [STYLE.md](styles/riso/STYLE.md)
+
+### 4. Mid-century Arch
+
+![Mid-century Arch — 7 slides](docs/styles/arch.gif)
+
+[View all 7 slides](docs/styles/arch-all.jpg) · [STYLE.md](styles/arch/STYLE.md)
+
+### 5. Ink and Seal
+
+![Ink and Seal — 7 slides](docs/styles/seal.gif)
+
+[View all 7 slides](docs/styles/seal-all.jpg) · [STYLE.md](styles/seal/STYLE.md)
+
+### 6. Transit Map
+
+![Transit Map — 7 slides](docs/styles/transit.gif)
+
+[View all 7 slides](docs/styles/transit-all.jpg) · [STYLE.md](styles/transit/STYLE.md)
+
+### 7. Highlighter
+
+![Highlighter — 7 slides](docs/styles/marker.gif)
+
+[View all 7 slides](docs/styles/marker-all.jpg) · [STYLE.md](styles/marker/STYLE.md)
+
+### 8. Chalkboard
+
+![Chalkboard — 7 slides](docs/styles/chalk.gif)
+
+[View all 7 slides](docs/styles/chalk-all.jpg) · [STYLE.md](styles/chalk/STYLE.md)
+
+### 9. Outline Rail
+
+![Outline Rail — 7 slides](docs/styles/rail.gif)
+
+[View all 7 slides](docs/styles/rail-all.jpg) · [STYLE.md](styles/rail/STYLE.md)
+
+### 10. Chapter Colour
+
+![Chapter Colour — 7 slides](docs/styles/chapter.gif)
+
+[View all 7 slides](docs/styles/chapter-all.jpg) · [STYLE.md](styles/chapter/STYLE.md)
+
+### 11. Side Title
+
+![Side Title — 7 slides](docs/styles/feature.gif)
+
+[View all 7 slides](docs/styles/feature-all.jpg) · [STYLE.md](styles/feature/STYLE.md)
+
+### 12. Citation Card
+
+![Citation Card — 7 slides](docs/styles/cite.gif)
+
+[View all 7 slides](docs/styles/cite-all.jpg) · [STYLE.md](styles/cite/STYLE.md)
+
+### 13. One Ink
+
+![One Ink — 7 slides](docs/styles/mono.gif)
+
+[View all 7 slides](docs/styles/mono-all.jpg) · [STYLE.md](styles/mono/STYLE.md)
+
+### 14. Large Print
+
+![Large Print — 7 slides](docs/styles/access.gif)
+
+[View all 7 slides](docs/styles/access-all.jpg) · [STYLE.md](styles/access/STYLE.md)
+
+### 15. Night Hall
+
+![Night Hall — 7 slides](docs/styles/night.gif)
+
+[View all 7 slides](docs/styles/night-all.jpg) · [STYLE.md](styles/night/STYLE.md)
+
+### 16. Data Fingerprint
+
+![Data Fingerprint — 7 slides](docs/styles/fingerprint.gif)
+
+[View all 7 slides](docs/styles/fingerprint-all.jpg) · [STYLE.md](styles/fingerprint/STYLE.md)
+
+### 17. Kraft and White Ink
+
+![Kraft and White Ink — 7 slides](docs/styles/kraft.gif)
+
+[View all 7 slides](docs/styles/kraft-all.jpg) · [STYLE.md](styles/kraft/STYLE.md)
 
 ## Credits
 
