@@ -70,7 +70,7 @@ python3 engine/build.py examples/resume --open gallery   # → examples/resume/o
 python3 engine/lint.py  examples/resume                  # every style must print PASS
 ```
 
-Open `examples/resume/out/deck.html` in a browser. It opens as a gallery of all styles. Click a slide to present it.
+Open `examples/resume/out/deck.html` in a browser. The gallery shows every slide in one style. Use the left and right arrow keys, buttons, or style menu to change styles. Click a slide to present it with step-by-step reveals.
 
 ## What the agent does with your paper
 
@@ -104,7 +104,7 @@ Open `out/deck.html`. Everything is in this one file, and it works offline.
 | D | show where every number on this slide comes from |
 | S | switch style |
 | E | edit |
-| G | gallery of all styles |
+| G | gallery (one complete style at a time) |
 
 ## Editing after delivery
 

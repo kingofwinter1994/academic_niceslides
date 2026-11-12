@@ -21,15 +21,14 @@ body.gallery{background:#E4E3DF;color:#19191B;font:16px/1.6 var(--ui);height:aut
 .g-wrap{max-width:1320px;margin:0 auto;padding:34px 20px 80px;display:flex;flex-direction:column;gap:20px}
 .g-wrap h1{font-size:28px;line-height:1.25;margin:0;font-weight:650}
 .g-intro,.g-lede{max-width:50em;color:#5E5D5A;margin:0}.g-lede b{color:#19191B}.g-lede:empty{display:none}
-.g-nav,.g-pick{display:flex;flex-wrap:wrap;gap:6px}
-.g-nav{position:sticky;top:0;z-index:5;background:#E4E3DF;padding:10px 0;border-bottom:1px solid #C9C7C1}
-.g-nav a,.g-pick button{font:inherit;padding:5px 14px;border-radius:999px;color:#19191B;text-decoration:none;border:1px solid #C9C7C1;background:#F4F3F0;cursor:pointer}
-.g-nav a.on,.g-pick button.on{background:#19191B;color:#E4E3DF;border-color:#19191B}
-.g-nav a.g-edit{margin-left:auto;border-color:#19191B}
-.g-nav a:focus-visible,.g-wrap button:focus-visible{outline:3px solid #2F6FEB;outline-offset:2px}
-.g-sheet{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-@media(min-width:1100px){.g-sheet{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:720px){.g-sheet{grid-template-columns:1fr}}
+.g-nav{position:sticky;top:0;z-index:5;background:#E4E3DF;padding:10px 0;border-bottom:1px solid #C9C7C1;display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.g-nav button,.g-nav select{font:inherit;padding:5px 14px;border-radius:999px;color:#19191B;border:1px solid #C9C7C1;background:#F4F3F0;cursor:pointer}
+.g-select-label{display:flex;align-items:center;gap:8px}.g-select-label select{max-width:220px}
+.g-count{font-variant-numeric:tabular-nums;color:#5E5D5A;min-width:52px;text-align:center}
+.g-nav .g-edit{margin-left:auto;border-color:#19191B}
+.g-nav button:focus-visible,.g-nav select:focus-visible,.g-sheet button:focus-visible{outline:3px solid #2F6FEB;outline-offset:2px}
+.g-sheet{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+@media(max-width:720px){.g-sheet{grid-template-columns:1fr}.g-nav .g-edit{margin-left:0}}
 .g-sheet figure{margin:0;display:flex;flex-direction:column;gap:6px}.g-sheet figcaption{font-size:14px;color:#5E5D5A}
 .frame{all:unset;display:block;position:relative;aspect-ratio:16/9;overflow:hidden;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.18),0 8px 24px rgba(0,0,0,.08);background:#fff}
 .frame>.slide{position:absolute;left:0;top:0;transform-origin:0 0;transform:scale(var(--s,.3));pointer-events:none}

@@ -70,7 +70,7 @@ python3 engine/build.py examples/resume --open gallery   # → examples/resume/o
 python3 engine/lint.py  examples/resume                  # 每种风格都应显示 PASS
 ```
 
-用浏览器打开 `examples/resume/out/deck.html`，先看到所有风格的画廊，点任意一页开始放映。
+用浏览器打开 `examples/resume/out/deck.html`。画廊每次显示一种风格的全部页面。按左右方向键、点按钮或用菜单切换风格。点页面后开始逐步放映。
 
 ## agent 拿到论文后做什么
 
@@ -104,7 +104,7 @@ my-talk/
 | D | 显示本页每个数字是怎么算出来的 |
 | S | 换风格 |
 | E | 编辑 |
-| G | 所有风格的画廊 |
+| G | 返回画廊（每次显示一种完整风格） |
 
 ## 交付后怎么改
 
