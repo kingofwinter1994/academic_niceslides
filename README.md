@@ -1,14 +1,14 @@
-# academic_niceslide · Lectern
+# academic_niceslides
 
 **English** · [中文](README.zh-CN.md)
 
-Lectern turns a research paper into a talk that does not look AI-made. It is a skill for coding agents (Claude Code, Codex and others) with an engine behind it. The agent writes one semantic source file. The engine renders it in 17 styles and checks the result against fixed rules. You get a single HTML file that presents, edits itself and exports to PDF and PowerPoint.
+academic_niceslides turns a research paper into a talk that does not look AI-made. It is a skill for coding agents (Claude Code, Codex and others) with an engine behind it. The agent writes one semantic source file. The engine renders it in 17 styles and checks the result against fixed rules. You get a single HTML file that presents, edits itself and exports to PDF and PowerPoint.
 
 [Browse all 17 styles ↓](#17-styles)
 
 ## Why AI slides look like AI slides, and what this does instead
 
-| Symptom | Cause | What Lectern does |
+| Symptom | Cause | What academic_niceslides does |
 |---|---|---|
 | Tiny all-caps labels above titles, giant numbers, cards | Hierarchy faked with size and decoration | The source file has no field for them, and the checker rejects any text above a title or any number set larger than its sentence |
 | Every deck looks the same | Styles are only colour swaps | Each style is a medium (journal plate, Swiss poster, riso print, chalkboard…) with its own rules, written in `styles/<name>/STYLE.md` |
@@ -34,10 +34,10 @@ Lectern turns a research paper into a talk that does not look AI-made. It is a s
 You need Python 3.10+ and Google Chrome (or Chromium).
 
 ```bash
-git clone https://github.com/mamingatzu/academic_niceslide.git
-cd academic_niceslide
+git clone https://github.com/mamingatzu/academic_niceslides.git
+cd academic_niceslides
 pip install -r requirements.txt
-python3 -m playwright install chromium   # only if Chrome is not installed; or set LECTERN_CHROME=/path/to/chrome
+python3 -m playwright install chromium   # only if Chrome is not installed; or set ACADEMIC_NICESLIDES_CHROME=/path/to/chrome
 ```
 
 ### Use it from Claude Code
@@ -45,17 +45,17 @@ python3 -m playwright install chromium   # only if Chrome is not installed; or s
 Put the repository where Claude Code looks for skills. The folder name becomes the skill name.
 
 ```bash
-git clone https://github.com/mamingatzu/academic_niceslide.git ~/.claude/skills/lectern
-pip install -r ~/.claude/skills/lectern/requirements.txt
+git clone https://github.com/mamingatzu/academic_niceslides.git ~/.claude/skills/academic_niceslides
+pip install -r ~/.claude/skills/academic_niceslides/requirements.txt
 ```
 
 Then ask, for example: *"Make a 12-minute conference talk from paper.pdf. My name is …, email …, and these are our logos."*
 
 ### Use it from Codex (or any agent that reads AGENTS.md)
 
-Clone the repository anywhere, for example `~/tools/lectern`. Codex reads [`AGENTS.md`](AGENTS.md), which points it to `SKILL.md`. Open Codex in the folder that holds your paper and say:
+Clone the repository anywhere, for example `~/tools/academic_niceslides`. Codex reads [`AGENTS.md`](AGENTS.md), which points it to `SKILL.md`. Open Codex in the folder that holds your paper and say:
 
-> Follow `~/tools/lectern/SKILL.md` to make a 15-minute talk from `paper.pdf`. Speaker: …, email: …. Logos are in `./logos`. Show me the style options first.
+> Follow `~/tools/academic_niceslides/SKILL.md` to make a 15-minute talk from `paper.pdf`. Speaker: …, email: …. Logos are in `./logos`. Show me the style options first.
 
 The skill is plain Markdown plus Python, so any agent that can read files and run commands can follow it.
 
@@ -278,7 +278,7 @@ Each GIF cycles through all 7 slides. Open the full deck overview to see all sli
 
 ## Credits
 
-Lectern is released under the [MIT License](LICENSE). Third-party fonts and example data keep their own licenses; see [NOTICE.md](NOTICE.md).
+academic_niceslides is released under the [MIT License](LICENSE). Third-party fonts and example data keep their own licenses; see [NOTICE.md](NOTICE.md).
 
 Thanks to [Lemo-Opuscar](https://github.com/lemomo-ai/lemo-opuscar) for some of the ideas behind this project.
 

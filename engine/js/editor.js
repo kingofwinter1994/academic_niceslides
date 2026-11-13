@@ -18,7 +18,7 @@ function describe(p) {
 }
 function edit() {
   ST.mode = 'edit'; document.body.className = 'edit'; if (ED.prev == null) ED.prev = 99;
-  ui.innerHTML = `<div class="e-top"><b>Lectern 编辑</b><button data-a="present">放映</button><button data-a="gallery">全部风格</button><button data-a="undo">撤销</button><button data-a="redo">重做</button>
+  ui.innerHTML = `<div class="e-top"><b>academic_niceslides 编辑</b><button data-a="present">放映</button><button data-a="gallery">全部风格</button><button data-a="undo">撤销</button><button data-a="redo">重做</button>
 <span class="e-sp"></span><span class="e-lint"></span><button data-a="html" class="pri">保存为 HTML</button><button data-a="json">导出 deck.json</button><button data-a="copy">复制 JSON</button><button data-a="pdf">打印成 PDF</button></div>
 <aside class="e-list"></aside><aside class="e-insp"></aside><div class="e-scrub"></div><div id="e-tb"></div><div id="e-gut"><i></i></div><div id="lx-lintbox"></div>`;
   $('.e-top').onclick = e => { const a = e.target.dataset.a; if (!a) return;

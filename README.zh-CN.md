@@ -1,14 +1,14 @@
-# academic_niceslide · Lectern
+# academic_niceslides
 
 [English](README.md) · **中文**
 
-Lectern 把一篇论文变成一场没有“AI 味”的学术报告。它是给编程 agent（Claude Code、Codex 等）用的 skill，背后带一个引擎：agent 只写一份语义源文件，引擎把它渲染成 17 种风格，并按固定规则逐页检查。成品是一个 HTML 文件，能放映、能自己编辑，也能导出 PDF 和 PowerPoint。
+academic_niceslides 把一篇论文变成一场没有“AI 味”的学术报告。它是给编程 agent（Claude Code、Codex 等）用的 skill，背后带一个引擎：agent 只写一份语义源文件，引擎把它渲染成 17 种风格，并按固定规则逐页检查。成品是一个 HTML 文件，能放映、能自己编辑，也能导出 PDF 和 PowerPoint。
 
 [查看全部 17 种风格 ↓](#17-种风格)
 
 ## AI 做的幻灯片为什么一股 AI 味，这里怎么解决
 
-| 症状 | 原因 | Lectern 的做法 |
+| 症状 | 原因 | academic_niceslides 的做法 |
 |---|---|---|
 | 标题上方的全大写小标签、超大数字、卡片 | 没有构图，只能靠尺寸和装饰硬造层级 | 源文件里没有这些字段；检查器拦下标题上方的任何文字，以及比所在句子更大的数字 |
 | 每份都长得一样 | 所谓风格只是换配色 | 每种风格是一种媒介（期刊图版、瑞士海报、孔版印刷、黑板……），规则写在 `styles/<名字>/STYLE.md` |
@@ -34,10 +34,10 @@ Lectern 把一篇论文变成一场没有“AI 味”的学术报告。它是给
 需要 Python 3.10+ 和 Google Chrome（或 Chromium）。
 
 ```bash
-git clone https://github.com/mamingatzu/academic_niceslide.git
-cd academic_niceslide
+git clone https://github.com/mamingatzu/academic_niceslides.git
+cd academic_niceslides
 pip install -r requirements.txt
-python3 -m playwright install chromium   # 没装 Chrome 时才需要；也可以设 LECTERN_CHROME=/Chrome 的路径
+python3 -m playwright install chromium   # 没装 Chrome 时才需要；也可以设 ACADEMIC_NICESLIDES_CHROME=/Chrome 的路径
 ```
 
 ### 在 Claude Code 里用
@@ -45,17 +45,17 @@ python3 -m playwright install chromium   # 没装 Chrome 时才需要；也可�
 把仓库放进 Claude Code 读取 skill 的文件夹，文件夹名就是 skill 名：
 
 ```bash
-git clone https://github.com/mamingatzu/academic_niceslide.git ~/.claude/skills/lectern
-pip install -r ~/.claude/skills/lectern/requirements.txt
+git clone https://github.com/mamingatzu/academic_niceslides.git ~/.claude/skills/academic_niceslides
+pip install -r ~/.claude/skills/academic_niceslides/requirements.txt
 ```
 
 然后直接说，例如：“用 paper.pdf 做一个 12 分钟的会议报告。讲者是……，邮箱……，这是我们的 logo。”
 
 ### 在 Codex（或任何读 AGENTS.md 的 agent）里用
 
-把仓库克隆到任意位置，比如 `~/tools/lectern`。Codex 会读 [`AGENTS.md`](AGENTS.md)，它会指向 `SKILL.md`。在放论文的文件夹里打开 Codex，然后说：
+把仓库克隆到任意位置，比如 `~/tools/academic_niceslides`。Codex 会读 [`AGENTS.md`](AGENTS.md)，它会指向 `SKILL.md`。在放论文的文件夹里打开 Codex，然后说：
 
-> 按 `~/tools/lectern/SKILL.md` 用 `paper.pdf` 做一个 15 分钟的报告。讲者：……，邮箱：……。logo 在 `./logos`。先给我看风格选项。
+> 按 `~/tools/academic_niceslides/SKILL.md` 用 `paper.pdf` 做一个 15 分钟的报告。讲者：……，邮箱：……。logo 在 `./logos`。先给我看风格选项。
 
 skill 只是 Markdown 加 Python，任何能读文件、能运行命令的 agent 都能照着做。
 
@@ -312,7 +312,7 @@ docs/             README 用的图片
 
 ## 致谢
 
-Lectern 采用 [MIT 许可证](LICENSE)。第三方字体和示例数据保留各自的许可证；详见 [NOTICE.md](NOTICE.md)。
+academic_niceslides 采用 [MIT 许可证](LICENSE)。第三方字体和示例数据保留各自的许可证；详见 [NOTICE.md](NOTICE.md)。
 
 感谢 [Lemo-Opuscar](https://github.com/lemomo-ai/lemo-opuscar) 提供的一些思路。
 

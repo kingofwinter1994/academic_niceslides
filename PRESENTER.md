@@ -1,4 +1,4 @@
-# Lectern · 学术报告导演法
+# academic_niceslides · 学术报告导演法
 
 所有风格共用这一份。它决定质感的下限；`styles/<slug>/STYLE.md` 只决定“像什么”。
 读法：先读本文，再读一份 STYLE.md，然后才动手。

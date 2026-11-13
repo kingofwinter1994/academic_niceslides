@@ -1,9 +1,9 @@
 ---
-name: lectern
+name: academic_niceslides
 description: Build academic talk slides from a paper without AI-slop. Use when the user wants slides, a deck or a talk for a paper, thesis, seminar, conference or defence, or asks to restyle or fix academic slides.
 ---
 
-# Lectern: academic slides from a paper
+# academic_niceslides: academic slides from a paper
 
 You turn a paper into a talk. The engine in this folder renders a semantic deck file in any of the styles under `styles/`,
 and a deterministic lint decides whether a deck may be delivered. Talk to the user in their language; write deck text in the language of the talk.
@@ -13,8 +13,8 @@ and the `STYLE.md` of the style in use.
 
 ## Setup (once)
 
-`LIB` is the folder holding this file (a clone of https://github.com/mamingatzu/academic_niceslide). If you cannot find it, clone it; do not rebuild the engine from memory. Needs Python 3.10+ with `pip install -r $LIB/requirements.txt`, and Chrome
-(or `playwright install chromium`; set `LECTERN_CHROME` to a browser path if it is not found). Fonts are bundled.
+`LIB` is the folder holding this file (a clone of https://github.com/mamingatzu/academic_niceslides). If you cannot find it, clone it; do not rebuild the engine from memory. Needs Python 3.10+ with `pip install -r $LIB/requirements.txt`, and Chrome
+(or `playwright install chromium`; set `ACADEMIC_NICESLIDES_CHROME` to a browser path if it is not found). Fonts are bundled.
 Each talk is a project folder holding `deck.json`, `facts.json` and `assets/`. Copy `examples/resume/` to see the shape; never edit it.
 
 ## Ask once, then work

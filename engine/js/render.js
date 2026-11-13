@@ -1,4 +1,4 @@
-/* Lectern renderer: deck JSON + facts -> slide HTML. The only renderer; the editor, lint, PDF and PPTX all read its output. */
+/* academic_niceslides renderer: deck JSON + facts -> slide HTML. The only renderer; the editor, lint, PDF and PPTX all read its output. */
 const LX = {D: null, F: null, IMG: null, STY: null, missing: new Set()};
 const M = '−';
 const SLOTS = {fig: [1109, 600], coef: [1680, 250], paperfig: [1109, 620], glyph_title: [520, 430], glyph_flow: [480, 400], glyph_close: [330, 280]};

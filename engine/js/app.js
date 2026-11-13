@@ -41,7 +41,7 @@ function gallery() {
   ORDER.forEach(s => { const st = {...LX.STY[s]}; st.slots = {...SLOTS, ...(st.slots || {})}; sl[s] = LX.D.slides.map((x, i) => slide(x, i, n, st)); });
   const tok = Object.entries(LX.D.meta.tokens || {}).map(([k, v]) => `${k}:${v}`).join(';');
   const frame = (s, i) => `<button class="frame s-${s}" style="${esc(tok)}" data-s="${s}" data-i="${i}" aria-label="${esc(LX.STY[s].cn)} ${i + 1}">${sl[s][i]}</button>`;
-  ui.innerHTML = `<div class="g-wrap"><h1>${esc(LX.D.meta.short || 'Lectern')}</h1>
+  ui.innerHTML = `<div class="g-wrap"><h1>${esc(LX.D.meta.short || 'academic_niceslides')}</h1>
 <p class="g-intro">同一份内容，${ORDER.length} 种风格。点任意一页开始放映：点击或按右方向键逐步呈现，D 显示本页每个数字的来历，S 换风格，N 显示讲稿，E 进入编辑，G 回到这里。</p>
 <nav class="g-nav"><a href="#" data-v="compare">同页对比</a>${ORDER.map(s => `<a href="#" data-v="${s}">${esc(LX.STY[s].cn)}</a>`).join('')}<a href="#" data-v="edit" class="g-edit">编辑这份幻灯片</a></nav>
 <div class="g-pick">${LX.D.slides.map((x, i) => `<button data-p="${i}">${i + 1} · ${esc(name(i))}</button>`).join('')}</div><p class="g-lede"></p><div class="g-sheet"></div></div>` +
