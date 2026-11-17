@@ -20,3 +20,4 @@
 - [x] Update README clone URLs and local remotes; verify GitHub sync.
 
 - [x] Replace old-account attribution and links throughout published history; verify remote commits.
+- [ ] Confirm GitHub refreshes the cached contributor list. Remote commits use only the new account; the contributor endpoint still returns stale data.
