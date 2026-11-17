@@ -19,4 +19,4 @@
 - [x] Transfer request sent; replaced with upload because GitHub requires email acceptance.
 - [x] Update README clone URLs and local remotes; verify GitHub sync.
 
-- [ ] Replace old-account attribution and links throughout published history; verify remote commits.
+- [x] Replace old-account attribution and links throughout published history; verify remote commits.
