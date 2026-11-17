@@ -15,6 +15,6 @@
 - [x] Rename the project and repository to `academic_niceslides`; remove the Lectern display name.
 - [x] Update installation paths, sync the installed skill, and verify the renamed project.
 
-- [ ] Upload and verify `mamingatzu/academic_niceslides`, then delete the old repository.
+- [x] Upload and verify `mamingatzu/academic_niceslides`, then delete the old repository.
 - [x] Transfer request sent; replaced with upload because GitHub requires email acceptance.
-- [ ] Update README clone URLs and local remotes; verify GitHub sync.
+- [x] Update README clone URLs and local remotes; verify GitHub sync.
