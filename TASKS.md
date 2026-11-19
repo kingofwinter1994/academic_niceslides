@@ -20,4 +20,4 @@
 - [x] Update README clone URLs and local remotes; verify GitHub sync.
 
 - [x] Replace old-account attribution and links throughout published history; verify remote commits.
-- [ ] Confirm GitHub refreshes the cached contributor list. Remote commits use only the new account; the contributor endpoint still returns stale data.
+- [ ] Confirm GitHub refreshes the homepage contributor list. Checked 2026-11-18: all 10 commits and the contributor API show only the current account, now named `kingofwinter1994`; the rendered homepage still shows two contributors. No homepage control can hide this section. Repository recreation requires a decision because the repository has 2 stars.

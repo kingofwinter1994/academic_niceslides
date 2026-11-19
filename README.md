@@ -31,6 +31,27 @@ academic_niceslides turns a research paper into a talk that does not look AI-mad
 
 ## Install
 
+Send one sentence to your AI agent (Claude Code, Codex, Cursor, or any coding agent that can read files and run commands):
+
+> `Install the academic_niceslides skill from https://github.com/mamingatzu/academic_niceslides`
+
+Modern coding agents can clone the repository, install dependencies, and verify the example automatically.
+
+### Update
+
+Whenever you want to pull the latest version, one sentence to your AI agent is enough:
+
+> `Update academic_niceslides from https://github.com/mamingatzu/academic_niceslides to the latest version.`
+
+### Start a talk
+
+Ask your agent, for example: *"Make a 12-minute conference talk from paper.pdf. My name is …, email …, and these are our logos."*
+
+If you do not specify a style upfront, the agent will list all 17 styles with a link to preview them here and ask whether to follow the default 7-part structure (and whether any section has special requirements) before building.
+
+<details>
+<summary>Manual install &amp; update (and technical steps for agents)</summary>
+
 You need Python 3.10+ and Google Chrome (or Chromium).
 
 ```bash
@@ -40,24 +61,31 @@ pip install -r requirements.txt
 python3 -m playwright install chromium   # only if Chrome is not installed; or set ACADEMIC_NICESLIDES_CHROME=/path/to/chrome
 ```
 
-### Use it from Claude Code
+#### Claude Code
 
-Put the repository where Claude Code looks for skills. The folder name becomes the skill name.
+Put the repository where Claude Code looks for skills. The folder name becomes the skill name:
 
 ```bash
 git clone https://github.com/mamingatzu/academic_niceslides.git ~/.claude/skills/academic_niceslides
 pip install -r ~/.claude/skills/academic_niceslides/requirements.txt
 ```
 
-Then ask, for example: *"Make a 12-minute conference talk from paper.pdf. My name is …, email …, and these are our logos."*
-
-### Use it from Codex (or any agent that reads AGENTS.md)
+#### Codex (or any agent that reads AGENTS.md)
 
 Clone the repository anywhere, for example `~/tools/academic_niceslides`. Codex reads [`AGENTS.md`](AGENTS.md), which points it to `SKILL.md`. Open Codex in the folder that holds your paper and say:
 
-> Follow `~/tools/academic_niceslides/SKILL.md` to make a 15-minute talk from `paper.pdf`. Speaker: …, email: …. Logos are in `./logos`. Show me the style options first.
+> Follow `~/tools/academic_niceslides/SKILL.md` to make a 15-minute talk from `paper.pdf`. Speaker: …, email: …. Logos are in `./logos`.
+
+#### Manual update
+
+```bash
+git -C ~/.claude/skills/academic_niceslides pull --ff-only   # or your cloned path
+pip install -r ~/.claude/skills/academic_niceslides/requirements.txt
+```
 
 The skill is plain Markdown plus Python, so any agent that can read files and run commands can follow it.
+
+</details>
 
 ## Try the example
 
@@ -74,10 +102,10 @@ Open `examples/resume/out/deck.html` in a browser. It opens as a gallery of all 
 
 ## What the agent does with your paper
 
-1. **Ground.** It writes a small `analysis.py` that puts every number the talk will show into `facts.json`, each with how it was computed. Without data files it registers the published numbers and cites the table and page. Figures are taken from the PDF with `engine/extract.py`.
-2. **Storyboard.** It writes `deck.json`: one claim-sentence title per slide, the one piece of evidence, the notes, and the click order. You can ask to approve the titles first.
-3. **Choose a style.** It builds a few slides in every style and lets you pick from the gallery.
-4. **Build and check.** `build.py` writes `out/deck.html`. `lint.py` must pass. The agent then looks at the rendered slides and fixes what it sees.
+1. **Confirm style and structure.** If you did not name a template, it proactively lists all 17 styles with the repo preview link so you can see how each looks. It also checks whether to follow the default 7-part structure (**RQ → Gap in Literature → Theory & Hypotheses → Data & Methods → Core Findings (detail) → Contribution → Limitations / Future Study**) and whether you have special requirements for any section (or proceeds directly if none).
+2. **Ground.** It writes a small `analysis.py` that puts every number the talk will show into `facts.json`, each with how it was computed. Without data files it registers the published numbers and cites the table and page. Figures are taken from the PDF with `engine/extract.py`.
+3. **Storyboard.** It writes `deck.json` following the confirmed structure (with detailed slides for Core Findings): one claim-sentence title per slide, the one piece of evidence, the notes, and the click order. You can ask to approve the titles first.
+4. **Build and check.** `build.py` writes `out/deck.html` in your chosen style (or as a gallery of all 17 styles if you ask to compare options). `lint.py` must pass. The agent then looks at the rendered slides and fixes what it sees.
 5. **Deliver.** It hands over `out/deck.html` and `out/<style>.pdf`, and a `.pptx` on request.
 
 ### The project folder

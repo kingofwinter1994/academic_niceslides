@@ -16,6 +16,20 @@
 
 论证 → 证据 → 构图 → 质感。前一项没立住，后一项做得再好也不算数。
 
+### 默认七段式学术结构
+
+除作者另有要求外，正片（扉页之后）按以下七部分组织叙事，并映射到现有 `deck.json` 版式（`title`、`flow`、`fig`、`models`、`paperfig`、`close`；不要自行新增版式名）：
+
+1. **研究问题（RQ）**：核心问题与研究动机（`flow` 或 `paperfig`）。
+2. **文献缺口（Gap in Literature）**：已有研究共识与尚未解决的缺口（`flow` 或论文对比/综述原图 `paperfig`）。
+3. **理论与假设（Theory and Hypotheses）**：理论机制、概念框架与可检验假设（`flow` 或论文机制示意图 `paperfig`）。
+4. **数据与方法（Data and Methods）**：数据来源、样本、识别策略或实验/实证设计与估计方法（`flow`、`paperfig` 或 `fig`）。
+5. **核心发现（Core Findings, detail）**：报告主干，按需拆成多页详述主发现、核心图表/模型、异质性或机制与稳健性检验（`fig`、`models`、`paperfig`，所有数字均来自 `facts.json`）。
+6. **研究贡献（Contribution）**：理论、实证或方法上的核心贡献（`flow` 或 `close`）。
+7. **局限与未来研究（Limitations / Future Study）**：主要局限、边界条件与后续方向（`flow`，或合并入收尾 `close` 页并附文献与论文二维码）。
+
+注：七个章节名写在 `meta.sections`（供页脚/侧栏导航）里，每页 `title` 仍必须是断言式整句（≥ 6 词、≤ 2 行、不以冒号结尾）。若选用 `rail` 或 `chapter`（导航栏/底色更适合 ≤ 6 个章节），可在 `meta.sections` 中将相邻标签简写合并（如“RQ & Gap”“贡献与局限”），但正文页面仍完整保留七部分内容。
+
 ## 2. IR：只有语义，没有装饰位
 
 项目目录里的 `deck.json` 是唯一的源头：agent 写它，编辑器改它，所有输出从它生成。一页只能有：
@@ -103,13 +117,12 @@
 
 ## 10. 流程
 
-1. **Grounding**：项目里的 `analysis.py` 把全部数字算进 `facts.json`；原图用 `extract.py` 取出。
-2. **Storyboard**：只写 `deck.json` 的标题、证据映射和点击顺序，先过内容。
-3. **选风格**：`python3 engine/build.py <project> --open gallery` 把所有风格装进一个文件，在缩略图尺度上挑。
-4. **构建**：`python3 engine/build.py <project> --styles <slug>` → `out/deck.html`
-5. **Lint**：`python3 engine/lint.py <project>`，必须全过。
-6. **目检**：`python3 engine/render.py <project> <slug>`，看 `out/sheets/`（终态）和 `out/steps/`（每次点击），修一轮。
-7. **交付**：`out/deck.html`（放映、编辑、导出都在这一个文件里）、`out/<slug>.pdf`、需要时 `out/<slug>.pptx`。
+1. **确认与取证**：若用户未指定风格，主动列出全部 17 种风格名称并附仓库预览链接供选择；同时确认是否遵循默认七段式结构以及各部分有无特殊要求（无特殊要求则直接推进）。确认后，用项目的 `analysis.py` 把全部数字算进 `facts.json`，原图用 `extract.py` 取出。
+2. **Storyboard**：按已确认的结构（默认七段式，并详述 Core Findings）写 `deck.json` 的断言式标题、证据映射和点击顺序；若用户要求先审标题，先发清单等待确认。
+3. **选风格 / 构建**：按用户选定风格执行 `python3 engine/build.py <project> --styles <slug>` → `out/deck.html`。仅当用户仍希望在自己的内容上横向比对，或无人值守未指定风格时，先用 `python3 engine/build.py <project> --open gallery` 产出全风格画廊供挑选。
+4. **Lint**：`python3 engine/lint.py <project>`，必须全过。
+5. **目检**：`python3 engine/render.py <project> <slug>`，看 `out/sheets/`（终态）和 `out/steps/`（每次点击），修一轮。
+6. **交付**：`out/deck.html`（放映、编辑、导出都在这一个文件里）、`out/<slug>.pdf`、需要时 `out/<slug>.pptx`。
 
 ## 11. Lint 规则（对渲染后的页面跑，不是对源码跑）
 

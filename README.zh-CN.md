@@ -31,6 +31,25 @@ academic_niceslides 把一篇论文变成一场没有“AI 味”的学术报告
 
 ## 安装
 
+最简便的方式是直接发一句话给你的 AI agent（Claude Code、Codex、Cursor 等），现在 AI agent 可以直接帮你完成克隆、装依赖和验证：
+
+> `帮我安装 academic_niceslides：https://github.com/mamingatzu/academic_niceslides`
+
+### 更新
+
+后续需要更新到最新版本时，同样发一句话给你的 AI agent 即可：
+
+> `帮我把 academic_niceslides 更新到最新版本（https://github.com/mamingatzu/academic_niceslides）`
+
+### 开始做报告
+
+例如直接对 agent 说：*“用 paper.pdf 做一个 12 分钟的会议报告。讲者是……，邮箱……，这是我们的 logo。”*
+
+如果你没有提前指定模板，agent 会主动列出全部 17 种模板名称并附上仓库预览链接，同时向你确认是否采用默认七段式结构以及各部分有无特殊要求，没特殊要求就直接开始制作。
+
+<details>
+<summary>手动安装与更新（同时供 Agent 参考）</summary>
+
 需要 Python 3.10+ 和 Google Chrome（或 Chromium）。
 
 ```bash
@@ -40,7 +59,7 @@ pip install -r requirements.txt
 python3 -m playwright install chromium   # 没装 Chrome 时才需要；也可以设 ACADEMIC_NICESLIDES_CHROME=/Chrome 的路径
 ```
 
-### 在 Claude Code 里用
+#### 在 Claude Code 里用
 
 把仓库放进 Claude Code 读取 skill 的文件夹，文件夹名就是 skill 名：
 
@@ -49,15 +68,22 @@ git clone https://github.com/mamingatzu/academic_niceslides.git ~/.claude/skills
 pip install -r ~/.claude/skills/academic_niceslides/requirements.txt
 ```
 
-然后直接说，例如：“用 paper.pdf 做一个 12 分钟的会议报告。讲者是……，邮箱……，这是我们的 logo。”
-
-### 在 Codex（或任何读 AGENTS.md 的 agent）里用
+#### 在 Codex（或任何读 AGENTS.md 的 agent）里用
 
 把仓库克隆到任意位置，比如 `~/tools/academic_niceslides`。Codex 会读 [`AGENTS.md`](AGENTS.md)，它会指向 `SKILL.md`。在放论文的文件夹里打开 Codex，然后说：
 
-> 按 `~/tools/academic_niceslides/SKILL.md` 用 `paper.pdf` 做一个 15 分钟的报告。讲者：……，邮箱：……。logo 在 `./logos`。先给我看风格选项。
+> 按 `~/tools/academic_niceslides/SKILL.md` 用 `paper.pdf` 做一个 15 分钟的报告。讲者：……，邮箱：……。logo 在 `./logos`。
+
+#### 手动更新
+
+```bash
+git -C ~/.claude/skills/academic_niceslides pull --ff-only   # 或替换为你的克隆路径
+pip install -r ~/.claude/skills/academic_niceslides/requirements.txt
+```
 
 skill 只是 Markdown 加 Python，任何能读文件、能运行命令的 agent 都能照着做。
+
+</details>
 
 ## 先跑一遍样例
 
@@ -74,10 +100,10 @@ python3 engine/lint.py  examples/resume                  # 每种风格都应显
 
 ## agent 拿到论文后做什么
 
-1. **取证。** 写一个小的 `analysis.py`，把报告要出现的每个数字算进 `facts.json`，并写明怎么算的。没有数据文件时，就登记论文发表的数字，并注明表号和页码。论文里的图用 `engine/extract.py` 取出。
-2. **故事板。** 写 `deck.json`：每页一句结论式标题、唯一的证据、讲解文字和点击顺序。你可以要求先审标题。
-3. **选风格。** 用几页真实内容渲染所有风格，在画廊里让你挑。
-4. **构建与检查。** `build.py` 生成 `out/deck.html`，`lint.py` 必须全部通过；然后 agent 自己看渲染出来的页面，修一轮。
+1. **确认风格与结构。** 如果你没有指定模板，agent 会主动列出全部 17 种风格名称，并附上仓库预览链接方便你查看效果；同时确认是否遵循默认七段式结构（**研究问题 RQ → 文献缺口 Gap in Literature → 理论与假设 Theory & Hypotheses → 数据与方法 Data & Methods → 核心发现（详述 Core Findings）→ 研究贡献 Contribution → 局限与未来研究 Limitations / Future Study**），以及对各部分有没有特殊要求，没有的话就直接推进。
+2. **取证。** 写一个小的 `analysis.py`，把报告要出现的每个数字算进 `facts.json`，并写明怎么算的。没有数据文件时，就登记论文发表的数字，并注明表号和页码。论文里的图用 `engine/extract.py` 取出。
+3. **故事板。** 按确认好的结构写 `deck.json`（重点展开核心发现）：每页一句结论式标题、唯一的证据、讲解文字和点击顺序。你可以要求先审标题。
+4. **构建与检查。** `build.py` 按选定风格生成 `out/deck.html`（如果你要求先比较效果，也可以用画廊模式同时预览全部风格），`lint.py` 必须全部通过；然后 agent 自己看渲染出来的页面，修一轮。
 5. **交付。** `out/deck.html` 和 `out/<风格>.pdf`；需要时再给 `.pptx`。
 
 ### 一个报告的项目文件夹
